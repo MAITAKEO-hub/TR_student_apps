@@ -1,0 +1,127 @@
+17行目〜29行目
+
+function startBattle() {
+//     const randomEnemy = enemies[Math.floor(Math.random() * enemies.length)];
+//     document.body.innerHTML = `
+//         <div class="game-container battle-screen">
+//             <h1>敵があらわれた！</h1>
+//             <p class="enemy">🆚 ${randomEnemy.name}</p>
+//             <div class="command-box">
+//                 <button onclick="attack()">▶ たたかう</button>
+//                 <button onclick="escape()">▶ にげる</button>
+//             </div>
+//         </div>
+//     `;
+// }  
+
+
+
+4行目〜51行目
+
+//   document.addEventListener("keydown", (event) => {
+  //     console.log("Key pressed:");
+  //     if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+  //       console.log("input area focus");
+  //       return; // フォーム入力中は無視
+  //   }          
+  //     if (event.key === "Enter") {
+  //         console.log("Enter key pressed - starting battle");
+  //         startBattle();
+  //     }
+  // });
+
+
+  document.addEventListener("keydown", (event) => {
+    console.log("Key pressed:");
+    if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+      console.log("input area focus");
+      return; // フォーム入力中は無視
+  }          
+    if (event.key === "Enter") {
+        console.log("Enter key pressed - starting battle");
+        startBattle();
+    }
+});
+
+
+255行目〜
+
+function startBattle() {
+  const randomEnemy = enemies[Math.floor(Math.random() * enemies.length)];
+  document.body.innerHTML = `
+      <div class="game-container battle-screen">
+          <h1>敵があらわれた！</h1>
+          <p class="enemy">🆚 ${randomEnemy}</p>
+          <div class="command-box">
+              <button onclick="attack()">▶ たたかう</button>
+              <button onclick="escape()">▶ にげる</button>
+          </div>
+      </div>
+  `;
+}
+// });
+
+function attack() {
+alert("こうげき！"); 
+}
+
+function escape() {
+alert("にげた！");
+location.reload(); // 初期画面に戻る
+}
+
+});
+
+
+
+const riddleEntries = Object.entries(riddles);
+const [riddle, correctAnswer] = riddleEntries[Math.floor(Math.random() * riddleEntries.length)];
+console.log(`ナゾナゾ:${riddle}`);
+if } else {
+  //通常の敵には単語問題を出題
+  const words = Object.entries(wordList);
+  const [word, meaning] = words[Math.floor(Math.random() * words.length)];
+  console.log('問題:${word}の意味は？');
+}
+    const answer = await askQuestion("答え: ");
+if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+  console.log("正解！敵に10ダメージ！");
+  enemy.takeDamage(10);
+} else {
+  console.log(`不正解。。。正解は${correctAnswer}です。プレイヤーに10ダメージ！`);
+  player.takeDamage(10);
+}
+console.log(`${player.name}のHP:${player.hp},${enemy.name}のHP:${enemy.hp}`);
+   }
+if (player.isAlive()) {
+  console.log(`${enemy.name}を倒した！`);
+} else {
+  console.log("ゲームオーバー");
+}
+      }
+async function main() {
+  console.log("English Gameへようこそ！");
+  const name = await askQuestion("プレイヤーの名前を入力してください: ");
+  const player = new Player(name);
+  const enemies = [
+    new Enemy("スライム", 10),
+    new Enemy("ゴブリン", 20),
+    new Enemy("ドラゴン", 30),
+    new Enemy("魔王", 50, true)//魔王をボス敵として追加
+  ];
+  for (const enemy of enemies) {
+    if (player.isAlive()) {
+      await battle(player, enemy);
+    } else {
+      break;
+    }
+  }
+
+  if (player.isAlive()) {
+    console.log("全ての敵を倒した！ゲームクリア！");
+  } else {
+    console.log("また挑戦してね");
+  }
+  rl.close();
+}
+main();

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <title>Web-Alpha</title>
+    <style>
+        body {font-family: Arial, sans-serif;background-color: #e1f5fe;color: #333;margin: 0;padding: 0;}
+        .header {background-color: #2196f3;color: white;text-align: center;padding: 15px 0;}
+        .version {background-color: #00bcd4;color: white;text-align: center;padding: 5px;margin: 20px auto;border-radius: 5px;}
+        .search-container {display: flex;justify-content: center;gap: 15px;margin-top: 20px;}
+        .search-box {padding: 10px;font-size: 16px;width: 300px;border-radius: 5px;border: 1px solid #ccc;}
+        .search-button {padding: 10px;font-size: 16px;border-radius: 5px;border: 1px solid #ccc;background-color: #2196f3;color: white;cursor: pointer;}
+        .refresh-button {padding: 10px;font-size: 16px;border-radius: 5px;border: 1px solid #ccc;background-color: #f44336;color: white;cursor: pointer;}
+        .intel-section {margin-top: 40px;padding: 20px;background-color: #ffffff;border-radius: 8px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);text-align: center;}
+        .intel-section h1 {color: #2798f5;}
+        .intel-section h2 {color: #05518e;}
+        .intel-section h3 {color: #17a3ad;}
+        .intel-section h4 {color: #00bcd4;}
+        .intel-section h5 {color: #12eed1;}
+        .intel-section img {max-width: 20%;margin-top: 20px;border-radius: 8px;}
+        .intel-video {width: 100%;max-width: 800px;margin-top: 20px;border-radius: 8px;}
+        .media-container {display: flex;justify-content: center;gap: 15px;flex-wrap: wrap;margin: 20px 0;}
+        .media-container img, .media-container video {width: 100%;max-width: 480px;border-radius: 8px;cursor: pointer;}
+        .media-container img:hover, .media-container video:hover {transform: scale(1.05);}
+        .modal {display: none;position: fixed;z-index: 1;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.8);text-align: center;}
+        .modal-content {max-width: 80%;max-height: 80%;margin: auto;}
+        .close {position: absolute;top: 20px;right: 20px;color: white;font-size: 30px;cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div class="header"><h1>Intel Products Easy Search</h1></div>
+    <div class="version"><h4>Beta(Build0.10)</h4></div>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search in this page...">
+        <button class="search-button" onclick="searchOffline()">Search Page</button>
+        <input type="text" id="onlineSearchInput" class="search-box" placeholder="Search on intel.com...">
+        <button class="search-button" onclick="searchOnline()">Search Web</button>
+        <button class="refresh-button" onclick="refreshPage()">Refresh</button>
+    </div>
+    <div class="intel-section">
+        <h1>About Intel</h1>
+        <h3>Intel is a global leader in computing innovation, known for its processors, graphics, and other essential technologies powering a wide range of devices, from PCs to servers.</h3>
+        <img src="IntelLogo2025.png" alt="Intel Logo">
+        <h2>Intel Products</h2>
+        <h3>Intel has a wide range of products, including:</h3>
+        <ul>
+            <li><strong>Core Processors</strong> - High-performance CPUs for desktops, laptops, and workstations.</li>
+            <li><strong>Arc GPUs</strong> - Graphics processing units for gaming, AI, and content creation.</li>
+            <li><strong>Xeon Processors</strong> - High-performance processors for servers and data centers.</li>
+        </ul>
+    </div>
+    <div class="media-container">
+        <img src="NEWGPU.webp" alt="New GPU" onclick="openModal(this)">
+        <img src="NEWNPU.webp" alt="New NPU" onclick="openModal(this)">
+    </div>
+    <div class="intel-section">
+        <h1>Latest Intel Technologies</h1>
+        <h3>Explore the latest advancements by Intel, including the Intel EVO series and Intel IrisXe GPUs.</h3>
+    </div>
+        <div class="media-container">
+        <video class="intel-video" controls ><source src="IntelEVO2025.mp4" type="video/mp4"></video>
+    </div>
+    <div class="intel-section">
+        <h1>Intel Newest Commercial</h1>
+        <h3>(Multi Language Not Supported)</h3>
+    </div>
+    <div class="media-container">
+        <video class="responsive-video" autoplay muted loop><source src="IntelArcGPU2025.mp4" type="video/mp4"></video>
+        <video class="responsive-video" autoplay muted loop><source src="IntelCoreUltraCN2025.mp4" type="video/mp4"></video>
+    </div>
+    <div class="intel-section">
+        <h1>Local Saved Offline Files</h1>
+    </div>
+    <div class="version">
+        <h2>Something Wrong, No Data Here.</h2>
+    </div>
+    <div class="intel-section">
+        <h4>This is a test javascript website with both local and online function. You can use this for search about intel.com.</h4>
+        <h4>Try searching for any word in the above box! Enjoy your internet sufing!</h4>
+        <h5>Powered by CiaoHB Copyright ©2025 all rights reserved.</h5>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span><img class="modal-content" id="img01">
+    </div>
+    <script>
+        function searchOffline() {const searchTerm = document.getElementById('searchInput').value.toLowerCase();const content = document.body.innerText.toLowerCase();
+            if (content.includes(searchTerm)) {alert("Text found on this page!");} else {alert("Text not found on this page.");}}
+        function searchOnline() {const searchTerm = document.getElementById('onlineSearchInput').value;
+            if (searchTerm) {window.open('https://www.intel.com/content/www/us/en/search.html?q=#q=' + encodeURIComponent(searchTerm), '_blank');} else {alert('Please enter a search term.');}}
+        document.getElementById('searchInput').addEventListener('keydown', function(event) {if (event.key === 'Enter') {searchOffline();}});
+        document.getElementById('onlineSearchInput').addEventListener('keydown', function(event) {if (event.key === 'Enter') {searchOnline();}});
+        function refreshPage() {location.reload();}
+        function openModal(element) {const modal = document.getElementById("myModal");const modalImg = document.getElementById("img01");modal.style.display = "block";modalImg.src = element.src;}
+        function closeModal() {const modal = document.getElementById("myModal");modal.style.display = "none";}
+    </script>
+</body>
+</html>
